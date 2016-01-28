@@ -1,0 +1,110 @@
+<section class="content-header">
+<h1>
+ Devices
+<small><i class="fa fa-th-large"></i> Discovery service </small>
+</h1>
+
+</section>
+
+<section class="content">
+  <div class="box {{if isDiscoveryEnabled 'box-success' 'box-danger'}}">
+    <div class="box-header" style="padding-bottom:0px;">
+      <span class="box-title" style="font-size: 14px;">
+          <i class="fa fa-wifi"></i> &nbsp; {{if isDiscoveryEnabled 'Service enabled' 'Service disabled'}}
+      </span>
+      <div class="box-tools pull-right">
+          <div title="" data-toggle="tooltip" class="box-tools pull-right" data-original-title="Status">
+              <div data-toggle="btn-toggle" class="btn-group">
+                  <button class="btn btn-default btn-sm {{if isDiscoveryEnabled "active"}}" {{action 'enableDiscovery'}} type="button"><i class="fa fa-square text-green"></i></button>
+                  <button class="btn btn-default btn-sm {{unless isDiscoveryEnabled "active"}}" {{action 'disableDiscovery'}} type="button"><i class="fa fa-square text-red"></i></button>
+              </div>
+          </div>
+      </div>
+   </div>
+
+   <div class="col-xs-12 prl-5 input-group">
+       {{input type="text" placeholder="Custom device source xml..." class="form-control" value=customURL }}
+       <div class="input-group-btn">
+           <button class="btn btn-success {{if isCustomDisabled 'disabled'}}"  {{action 'appendCustom'}}><i class="fa fa-plus"></i></button>
+       </div>
+   </div>
+   {{#if devices.length}}
+   <div class="box-header" style="padding-bottom:0px;">
+     <span class="box-title" style="font-size: 14px;">
+         <i class="fa fa-refresh"></i> &nbsp; Clear found devices list <span class="badge">{{devices.length}}</span>
+     </span>
+     <div class="box-tools pull-right">
+       <span class="btn btn-default" {{action 'removeDevices'}}>Clear </span>
+     </div>
+  </div>
+  {{/if}}
+
+</div>
+
+  <div class="row">
+<!--  issue: #1 -->
+<!--
+    {{#if application.devicesOnline}}
+    <div class="col-sm-6 col-xs-12">
+     <div class="small-box pointer {{unless application.defaultDevice 'bg-aqua' 'bg-green'}}" {{action set 'application.defaultDevice' null}}>
+     <div class="inner">
+      <h4>All</h4>
+          <p>
+            All available devices
+          </p>
+        </div>
+        <div class="icon">
+          <i class="fa fa-share-alt"></i>
+        </div>
+        <span class="small-box-footer" href="#">
+            all available devices
+        </span>
+      </div>
+    </div>
+    {{/if}}
+-->
+
+{{#each devices as |dev|}}
+{{#if dev.online}}
+<div class="col-sm-6 col-xs-12">
+ <div class="small-box pointer {{if dev.isDefault 'bg-aqua' 'bg-green'}}" {{action set 'application.defaultDevice' dev.id}}>
+ <div class="inner">
+  <h4>{{dev.modelName}}</h4>
+      <p>
+        {{dev.friendlyName}} <small>{{dev.modelDescription}}</small>
+      </p>
+    </div>
+    <div class="icon">
+      <i class="fa fa-television"></i>
+    </div>
+        {{#link-to 'devices.info' dev.id tagName="span" class="small-box-footer pointer"}}More info &raquo;{{/link-to}}
+  </div>
+</div>
+{{/if}}
+{{/each}}
+  </div>
+
+
+{{#if application.devicesOffline}}
+<div class="box box-danger"></div>
+<div class="col-md-12">
+
+    {{#each devices as |dev|}}
+      {{#unless dev.online}}
+      <div class="row">
+        <div class="col-xs-10">
+          <i class="fa fa-chain-broken"></i>
+          &nbsp;&nbsp;
+          <small>
+          {{dev.modelName}}
+          {{dev.modelDescription}} <small>{{dev.friendlyName}}</small>
+          &nbsp;&nbsp;
+          {{dev.xml}} <span class="badge bg-red pointer" {{action 'removeDevice' dev}}>remove</span></small>
+        </div>
+      </div>
+      {{/unless}}
+    {{/each}}
+</div>
+{{/if}}
+
+</section>

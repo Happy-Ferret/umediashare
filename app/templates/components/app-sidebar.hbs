@@ -1,0 +1,34 @@
+<aside class="left-side sidebar-offcanvas">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+
+                  {{#if application.devicesOnline}}
+                  <div class="user-panel">
+                     {{#if application.defaultDevice}}
+                        <div class="pull-left image">
+                            <i class="fa fa-chain"></i>
+                        </div>
+                        <div class="pull-left info">
+                            <p>{{application.defaultDeviceRecord.modelName}}</p>
+                            <small>{{application.defaultDeviceRecord.friendlyName}}</small>
+                        </div>
+                      {{else}}
+                      <div class="inactive-color inactive-device">
+                           <i class="fa fa-exclamation-triangle pull-left"></i> No device selected
+                      </div>
+                      {{/if}}
+                    </div>
+                   {{/if}}
+                  <ul class="sidebar-menu">
+                    {{#link-to 'home' tagName="li" class="pointer"}}<a><i class="fa fa-history"></i><span> Dashboard</span></a>{{/link-to}}
+                      {{#link-to 'devices' tagName="li" class="pointer"}}<a><i class="fa fa-th-large"></i><span> Devices</span>
+                      </a>{{/link-to}}
+                    {{#if application.defaultDevice}}
+                      {{#link-to 'share' tagName="li" class="pointer"}}<a><i class="fa fa-slideshare"></i><span> Media Share</span></a>{{/link-to}}
+                    {{else}}
+                      <li ><a class="inactive-color"><i class="fa fa-slideshare"></i><span> Media Share</span></a></li>
+                    {{/if}}
+                  </ul>
+                </section>
+                <!-- /.sidebar -->
+</aside>

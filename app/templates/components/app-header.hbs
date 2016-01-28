@@ -1,0 +1,62 @@
+<header class="header">
+            <a class="logo" href="#">
+                <!-- Add the class icon to your logo image or logo icon to add the margining -->
+                uMediaShare
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+              <nav class="navbar navbar-static-top" role="navigation">
+                <a class="navbar-btn sidebar-toggle" role="button" data-toggle="offcanvas" href="#">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </a>
+
+
+              <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                      {{#if application.devicesOnline}}
+                        <li class="dropdown notifications-menu">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <i class="fa fa-refresh"></i>
+                                <span class="label label-success">{{application.devicesOnline}}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">{{application.devicesOnline}} devices online</li>
+                                <li>
+                                    <ul class="menu" style="overflow-y: auto; width: 100%; height: 200px;">
+                                      <!-- issue #1 -->
+                                      <!--
+                                      {{#if application.devicesOnline}}
+                                      <li class="container" {{action set 'application.defaultDevice' null}}>
+                                          <a class="row" href="">
+                                              <i class="pull-left fa {{unless application.defaultDevice 'fa-share-alt bg-aqua' 'fa-share-alt bg-green'}}"></i>
+                                            <div class="pt-8"><strong>All</strong></div>
+                                              <small>All available devices</small>
+                                          </a>
+                                      </li>
+                                      {{/if}}
+                                    -->
+                                        {{#each application.devices as |dev|}}
+                                          {{#if dev.online}}
+                                            <li class="container" {{action set 'application.defaultDevice' dev.id}}>
+                                                <a class="row" href="">
+                                                    <i class="pull-left fa {{if dev.isDefault 'fa-chain bg-aqua' 'fa-chain bg-green'}}"></i>
+                                                  <div class="pt-8"><strong>{{dev.modelName}}</strong></div>
+                                                    <small>{{dev.friendlyName}}</small>
+                                                    <small>{{dev.modelDescription}}</small>
+                                                </a>
+                                            </li>
+                                          {{/if}}
+                                        {{/each}}
+                                    </ul>
+                                </li>
+                                <li class="footer">{{#link-to 'devices'}}View all{{/link-to}}</li>
+                            </ul>
+                        </li>
+                       {{/if}}
+                    </ul>
+                </div>
+
+                  </nav>
+</header>
