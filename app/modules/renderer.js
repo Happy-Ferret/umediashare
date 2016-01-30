@@ -24,23 +24,39 @@ export default Ember.Object.extend({
   TrackMetaData: "<DIDL-Lite xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:dlna="urn:schemas-dlna-org:metadata-1-0/"><item id="0" parentID="34" restricted="0"><dc:title>222397405</dc:title><dc:creator>-</dc:creator><upnp:genre>Unknown</upnp:genre><res protocolInfo="http-get:*:video/x-matroska:*">http://www.ex.ua/get/222397405</res><upnp:class>object.item.videoItem.movie</upnp:class></item></DIDL-Lite>"
   TrackURI: "http://www.ex.ua/get/222397405" */
 
+  defaultDeviceObserver : function() {
+    this.stop();
+    this.lookupRenderer();
+    this.updateStatus();
+  }.observes('settings.defaultDevice'),
+
   statusUpdateur: function() {
+    this.set('upRepeater', setInterval(() => {
+        this.updateStatus.call(this);
+      }, 1000));
+  }.observes('device'),
+
+  updateStatus : function() {
     var client = this.get('device.client');
 
     if (client) {
-      this.set('upRepeater', setInterval(() => {
-        client.callAction('AVTransport', 'GetPositionInfo', { InstanceID: 0 }, (err, result) => {
-          if (err) {
-           this.set('errorMessage', err.toString());
-          } else {
-            this.get('mediaInfo').setProperties(result);
-          }
-        });
-      }, 1000));
+      client.callAction('AVTransport', 'GetPositionInfo', { InstanceID: 0 }, (err, result) => {
+        if (err) {
+         this.set('errorMessage', err.toString());
+        } else {
+          this.get('mediaInfo').setProperties(result);
+        }
+      });
     } else {
       clearInterval(this.get('upRepeater'));
     }
-  }.observes('device'),
+  },
+
+ seek : function(time) {
+   this.get('renderer').seek(time, (err) =>  {
+     if (err) { this.set('errorMessage', err.toString()); }
+   });
+ },
 
  stop: function() {
    this.lookupRenderer();
@@ -96,6 +112,7 @@ export default Ember.Object.extend({
 
       this.set('device', device);
       this.set('renderer', renderer);
+
       return renderer;
   },
 

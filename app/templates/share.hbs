@@ -32,12 +32,10 @@ Media share
 
                   <div class="row">
                     <div class="col-xs-2">{{renderer.mediaInfo.RelTime}}</div>
-                    <div class="col-xs-8"><input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20000" data-slider-step="1" data-slider-value="14"/></div>
+                    <div class="col-xs-8">{{input type="range" min=0 max=trackDuration value=trackRelTime class="col-xs-12" change=seek}}</div>
                     <div class="col-xs-2 text-right">{{renderer.mediaInfo.TrackDuration}}</div>
                   </div>
-                  <script>
-                    new Slider('#ex1'); // todo:  move slider to component
-                  </script>
+
 
                   <div class="control-stop pull-right pointer" {{action 'stopMedia'}}>
                     <i class="fa fa-stop-circle-o"></i>

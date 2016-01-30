@@ -18,8 +18,6 @@ module.exports = function(defaults) {
   app.import('vendor/adminlte/js/bootstrap.min.js');
   app.import('vendor/adminlte/js/AdminLTE/vendour.js');
   app.import('vendor/adminlte/css/bootstrap.min.css');
-  app.import('bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js');
-  app.import('bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css');
   app.import('bower_components/font-awesome/css/font-awesome.min.css');
   app.import('bower_components/roboto-fontface/css/roboto-fontface.css');
   app.import('vendor/komika/komika.css');
