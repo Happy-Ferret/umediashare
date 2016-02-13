@@ -25,3 +25,8 @@ github.com/linuxenko/umediashare
 Спасибо, стучите , готова рассмотреть любые идеи и предложения по улучшайзингу процесса и приложения.
 
 зыж:нонпрофит
+
+
+```
+DLNA/uPNP media controller. Goals: Implement full featured media center for entire list of home media devices. Support devices like TVs, PS3, Xbox, Android, PC and another renderers. Support simple media sharing, devices sharing such as video input devices, screen sharing.
+```
