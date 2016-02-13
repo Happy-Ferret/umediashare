@@ -1,4 +1,6 @@
-# uMediaShare (youtu.be/1xI6HVA9oGk)
+# uMediaShare 
+
+Demo http://youtu.be/1xI6HVA9oGk
 
 opensource pet project development test
 
@@ -12,3 +14,10 @@ Technologies:
  ember-cli (ember-elecron) as development framework
  bootstrap for styling
  electron application packaging
+ 
+ 
+TODO:
+ Local media sharing capabilities
+ Playlists implementation
+ Playlists editing export
+ Raspberi PI Test for PAUSE control
