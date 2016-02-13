@@ -2,7 +2,7 @@
 
 Demo http://youtu.be/1xI6HVA9oGk<br />
 
-Test project. Development is in progress<br />
+[Test project for development in team](http://dou.ua/forums/topic/10445/#857318). Development is in progress<br />
 
 Media content sharing between dlna/upnp devices.<br />
 The goals of development is: research, development and fun.<br />
