@@ -1,8 +1,8 @@
-# uMediaShare<br />
+# uMediaShare <br />
 
 Demo http://youtu.be/1xI6HVA9oGk<br />
 
-opensource pet project development test<br />
+Test project. Development is in progress<br />
 
 Media content sharing between dlna/upnp devices.<br />
 The goals of development is: research, development and fun.<br />
