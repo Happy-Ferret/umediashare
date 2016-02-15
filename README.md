@@ -25,5 +25,5 @@ TODO:<br />
 ## Contribution free
 
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/linuxenko/umediashare/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Build Status](https://travis-ci.org/linuxenko/umediashare.svg?branch=master)](https://travis-ci.org/linuxenko/umediashare) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/linuxenko/umediashare/trend.png)](https://bitdeli.com/free "Bitdeli Badge")  
 
