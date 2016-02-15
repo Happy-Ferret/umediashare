@@ -37,7 +37,7 @@ export default DS.Model.extend({
 
   clientDescription : function() {
     return DS.PromiseObject.create({
-     promise: new Ember.RSVP.Promise((resolve, reject) => {
+     promise: new Ember.RSVP.Promise((resolve) => {
           this.get('client').getDeviceDescription(function(err, description) {
             resolve(getProps(description));
           });
@@ -61,7 +61,7 @@ export default DS.Model.extend({
 
   clientMediaInfo : function() {
     return DS.PromiseObject.create({
-     promise: new Ember.RSVP.Promise((resolve, reject) => {
+     promise: new Ember.RSVP.Promise((resolve) => {
           this.get('client').callAction('AVTransport', 'GetMediaInfo', { InstanceID: 0 } ,function(err, description) {
             resolve(getProps(description));
           });

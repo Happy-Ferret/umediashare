@@ -6,10 +6,10 @@ export default {
                    Number.parseInt(contour[3]);
       return total;
     },
-    getDuration : (seconds) => {
+    getDuration : (s) => {
       var hours   = Math.floor(seconds / 3600);
       var minutes = Math.floor((seconds - (hours * 3600)) / 60);
-      var seconds = seconds - (hours * 3600) - (minutes * 60);
+      var seconds = s - (hours * 3600) - (minutes * 60);
       var time = hours < 10 ?  "0"+ hours +":" : hours + ":";
 
         minutes = (minutes < 10 && time !== "") ? "0" + minutes : String(minutes);

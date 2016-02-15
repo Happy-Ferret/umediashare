@@ -23,7 +23,7 @@ export default Ember.Object.extend({
             r.set('modelName', c['modelName']);
             r.set('modelURL', c['modelURL']);
             r.set('online', true);
-          } catch(e) {};
+          } catch(e) {}
 
           r.save();
         });

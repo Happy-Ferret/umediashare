@@ -1,6 +1,5 @@
 import Ember from 'ember';
 
-
 export default Ember.Controller.extend({
   devices : null,
   devicesOnline : 0,
@@ -30,8 +29,8 @@ export default Ember.Controller.extend({
       }
     });
 
-    if (this.get('defaultDeviceRecord.online') === false
-       && this.get('defaultDeviceRecord.id') === this.get('defaultDevice')){
+    if (this.get('defaultDeviceRecord.online') === false && this.get('defaultDeviceRecord.id') === this.get('defaultDevice'))
+    {
       this.set('defaultDevice', null);
     }
   }.observes('devices', 'devices.@each.online')

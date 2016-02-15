@@ -80,7 +80,7 @@ export default Ember.Object.extend({
     this.set('isLoading', true);
     return new Ember.RSVP.Promise((resolve, reject) => {
        this.lookupOptions(url).then((options) => {
-          renderer.load(url, options, (err, result) => {
+          renderer.load(url, options, (err) => {
               this.set('isLoading', false);
               if(err) {
                 this.set('errorMessage', err.toString());
