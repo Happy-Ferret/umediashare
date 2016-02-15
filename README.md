@@ -1,5 +1,7 @@
 # uMediaShare <br />
 
+[![Join the chat at https://gitter.im/linuxenko/umediashare](https://badges.gitter.im/linuxenko/umediashare.svg)](https://gitter.im/linuxenko/umediashare?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Demo http://youtu.be/1xI6HVA9oGk<br />
 
 [Test project for development in team](https://github.com/linuxenko/umediashare/blob/master/PROMO.md). Development is in progress<br />
