@@ -21,3 +21,5 @@ TODO:<br />
  * Playlists implementation<br />
  * Playlists editing export<br />
  * Raspberi PI Test for PAUSE control<br />
+ 
+## Contribution free
