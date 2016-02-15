@@ -23,3 +23,7 @@ TODO:<br />
  * Raspberi PI Test for PAUSE control<br />
  
 ## Contribution free
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/linuxenko/umediashare/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
