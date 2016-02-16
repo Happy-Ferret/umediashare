@@ -11,6 +11,9 @@ Router.map(function() {
     this.route('info', {path : ':id/info'});
   });
   this.route('share', {path : '/share'});
+  this.resource('playlists', { path : '/playlists'}, function() {
+      this.route('playlist', {path : ':id/playlist'});
+  });
 });
 
 export default Router;
