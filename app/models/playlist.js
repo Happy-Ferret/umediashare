@@ -2,5 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   name : DS.attr('string'),
-  playlistItem : DS.hasMany('playlistItem')
+  itemsNum : DS.attr('number'),
+
+  selected : false
 });

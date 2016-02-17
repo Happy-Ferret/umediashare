@@ -1,6 +1,7 @@
 /* jshint node: true */
 
 var electron = require('electron');
+//var Menu = require("menu");
 
 var app = electron.app;
 var mainWindow = null;
@@ -21,6 +22,18 @@ app.on('ready', function onReady() {
     });
 
     delete mainWindow.module;
+
+
+  /*  var template = [{
+        label: "uMediaShare",
+        submenu: [
+            { type: "separator" },
+            { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
+        ]}
+    ];
+
+
+    Menu.setApplicationMenu(Menu.buildFromTemplate(template)); */
 
     // If you want to open up dev tools programmatically, call
     // mainWindow.openDevTools();

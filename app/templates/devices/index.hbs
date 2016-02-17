@@ -42,27 +42,6 @@
 </div>
 
   <div class="row">
-<!--  issue: #1 -->
-<!--
-    {{#if application.devicesOnline}}
-    <div class="col-sm-6 col-xs-12">
-     <div class="small-box pointer {{unless application.defaultDevice 'bg-aqua' 'bg-green'}}" {{action set 'application.defaultDevice' null}}>
-     <div class="inner">
-      <h4>All</h4>
-          <p>
-            All available devices
-          </p>
-        </div>
-        <div class="icon">
-          <i class="fa fa-share-alt"></i>
-        </div>
-        <span class="small-box-footer" href="#">
-            all available devices
-        </span>
-      </div>
-    </div>
-    {{/if}}
--->
 
 {{#each devices as |dev|}}
 {{#if dev.online}}

@@ -5,8 +5,12 @@ Media
 
 <div class="box-tools pull-right">
     <div title="" data-toggle="tooltip" class="box-tools pull-right" data-original-title="Status">
-        <div data-toggle="btn-toggle" class="btn-group">
-            <button class="btn btn-success btn-sm" {{action 'createPlaylist'}} type="button"><i class="fa fa-plus"></i></button>
+        <div class="btn-group">
+            {{#unless isSelected}}
+              <button class="btn btn-success btn-sm" {{action 'createPlaylist'}} type="button"><i class="fa fa-plus"></i> Create</button>
+            {{else}}
+              <button class="btn btn-danger btn-sm" {{action 'removePlaylist'}} type="button"><i class="fa fa-times"></i> Remove</button> &nbsp;
+            {{/unless}}
         </div>
     </div>
 </div>
@@ -15,5 +19,38 @@ Media
 
 
 <section class="content">
+  <div class="row">
+  {{#each model as |playlist|}}
+    <div class="col-lg-3 col-xs-6">
+      <div class="small-box {{if playlist.selected 'bg-aqua' 'bg-green'}} pointer" {{action 'toggleSelection' playlist}}>
+          <div class="inner">
+              <h3>{{playlist.itemsNum}}<sup style="font-size: 20px"> </sup></h3>
+                <p>
+                    {{playlist.name}}
+                </p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-align-justify"></i>
+            </div>
+            {{#link-to 'playlists.playlist' playlist.id class="small-box-footer" bubbles=false}}
+                Edit playlist <i class="fa fa-arrow-circle-right"></i>
+            {{/link-to}}
+        </div>
+    </div>
+
+    {{else}}
+
+    <div class="error-page">
+        <div class="error-content col-xs-12 text-center" style="margin-left:0px;">
+          <br />
+            <h3><i class="fa fa-warning text-yellow"></i> No playlists found.</h3>
+            <p>
+                You can add new playlist using "Create" button below.
+            </p>
+        </div>
+    </div>
+
+  {{/each}}
+</div>
 
 </section>

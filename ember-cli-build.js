@@ -21,6 +21,7 @@ module.exports = function(defaults) {
   app.import('bower_components/font-awesome/css/font-awesome.min.css');
   app.import('bower_components/roboto-fontface/css/roboto-fontface.css');
   app.import('vendor/komika/komika.css');
+  app.import('vendor/electron/context-menu.js');
 
   var faAssets = new Funnel("bower_components/font-awesome/fonts", {
       srcDir: "/",
