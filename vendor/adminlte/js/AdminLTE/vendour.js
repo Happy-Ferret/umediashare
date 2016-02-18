@@ -102,6 +102,8 @@ $(function() {
     $(window).resize(function() {
       _fix();
     });
+
+
     document.addEventListener('DOMNodeInserted', function() {
         _fix();
     });

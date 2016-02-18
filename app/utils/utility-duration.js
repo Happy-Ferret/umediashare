@@ -1,6 +1,12 @@
 export default {
     getTime : (duration) => {
+      if (!duration) {
+        return 0;
+      }
       let contour = duration.match(/^(\d+)\:(\d+)\:(\d+)$/);
+      if (!contour || contour.length < 2 ) {
+        return 0;
+      }
       let total = (Number.parseInt(contour[1]) * 3600) +
                   (Number.parseInt(contour[2]) * 60) +
                    Number.parseInt(contour[3]);

@@ -1,0 +1,13 @@
+
+<div class="row">
+  <div class="col-xs-2 text-center">
+    <i class="fa fa-play play" {{action 'play'}}></i>
+    <div class="controls pull-right">
+      <i class="fa fa-fast-backward backward" {{action 'backward'}}></i>&nbsp;&nbsp;
+      <i class="fa fa-fast-forward forward" {{action 'forward'}}></i>
+    </div>
+  </div>
+  <div class="col-xs-2"><small>{{view.player.renderer.mediaInfo.RelTime}}</small></div>
+  <div class="col-xs-6">{{input type="range" min=0 max=view.player.trackDuration value=view.player.trackRelTime class="col-xs-12" change=view.player.seek}}</div>
+  <div class="col-xs-2 text-left"><small>{{view.player.renderer.mediaInfo.TrackDuration}}</small></div>
+</div>

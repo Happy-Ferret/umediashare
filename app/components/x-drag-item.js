@@ -13,6 +13,7 @@ export default Ember.Component.extend({
   dataItem : null,
   tagName : 'li',
   onReorder : null,
+  onFileDrop : null,
 
   createItemsOrderList() {
     var out = [];
@@ -23,6 +24,21 @@ export default Ember.Component.extend({
       });
     });
     return out;
+  },
+
+  getItemOrder(element) {
+    var item = Ember.$(element).attr('dataitem'), pos = 0;
+    Ember.$('li.playlist-item-movable[dataitem]').each(function(c) {
+      if (Ember.$(this).attr('dataitem') === item) {
+          pos = c ;
+        return;
+      }
+
+      if (typeof item === 'undefined') {
+        pos = c + 1;
+      }
+    });
+    return pos;
   },
 
   dragStart(event) {
@@ -46,10 +62,17 @@ export default Ember.Component.extend({
   },
 
   drop(event) {
-    Ember.$(`#${event.originalEvent.dataTransfer.getData('text/plain')}`).insertBefore(this.$());
-    set(this, 'itemOver', false);
-    if (this.get('onReorder')) {
-      this.onReorder(this.createItemsOrderList());
+    if (event.dataTransfer.files.length > 0) {
+      if (this.get('onFileDrop')) {
+        this.onFileDrop(event, this.getItemOrder(event.currentTarget));
+      }
+    } else {
+      Ember.$(`#${event.originalEvent.dataTransfer.getData('text/plain')}`).insertBefore(this.$());
+      if (this.get('onReorder')) {
+        this.onReorder(this.createItemsOrderList());
+      }
     }
+
+    set(this, 'itemOver', false);
   }
 });

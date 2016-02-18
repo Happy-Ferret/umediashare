@@ -46,19 +46,12 @@
           </div>
       </div>
       <div class="col-xs-12 prl-5 input-group">
-           {{input type="text" placeholder="Custom http source.." class="form-control"}}
+           {{input type="text" placeholder="Custom http source.." class="form-control" value=remoteFile}}
            <div class="input-group-btn">
-               <button class="btn btn-success disabled"><i class="fa fa-plus"></i></button>
+               <button class="btn btn-success {{unless remoteFile disabled}}" {{action "addRemoteFile"}}><i class="fa fa-plus"></i></button>
            </div>
       </div>
    </div>
-    <div class="panel-body">
-
-      <h4>Or drag and drop files below</h4>
-
-      {{#x-drop-zone dropped=fileDrop}}Just drag and drop files here{{/x-drop-zone}}
-
-    </div>
   </div>
 {{/if}}
 
@@ -70,26 +63,33 @@
         <p>
             You can add new playlist items using "Add item" button below.
         </p>
+          {{#x-drop-zone dropped=fileDrop}}Just drag and drop files here{{/x-drop-zone}}
     </div>
 </div>
 {{else}}
-<div class="box box-success">
-
-</div>
 
 <div class="playlist-items box">
   <ul class="todo-list">
 {{#each playlistItems as |item|}}
-  {{#x-drag-item dataItem=item.id onReorder=reorderItems}}
+  {{#x-drag-item dataItem=item.id onReorder=reorderItems onFileDrop=fileDrop}}
    <div>
-    <span class="text">{{item.localPath}}</span>
+    <small class="controls"><i class="fa fa-play pointer"></i></small>&nbsp;
+    <small>{{lead item.sort}}.</small>
+    <span class="text">{{item.name}}</span>
+    <small class="pull-right">
+    {{#if item.isLocal}}
+      <span class="badge bg-blue">local</span>
+    {{else}}
+      <span class="badge bg-yellow">remote</span>
+    {{/if}}
+  </small>
     <div class="tools">
       <i class="fa fa-trash-o" {{action "removeItem" item}}></i>
     </div>
    </div>
   {{/x-drag-item}}
 {{/each}}
-    {{#x-drag-item onReorder=reorderItems}}<div></div>{{/x-drag-item}}
+    {{#x-drag-item onReorder=reorderItems onFileDrop=fileDrop}}<div></div>{{/x-drag-item}}
   </ul>
 </div>
 {{/unless}}

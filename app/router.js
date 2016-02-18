@@ -10,7 +10,6 @@ Router.map(function() {
   this.resource('devices', {path : '/devices'}, function() {
     this.route('info', {path : ':id/info'});
   });
-  this.route('share', {path : '/share'});
   this.resource('playlists', { path : '/playlists'}, function() {
       this.route('playlist', {path : ':id/playlist'});
   });

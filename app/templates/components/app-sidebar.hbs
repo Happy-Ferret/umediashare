@@ -24,12 +24,6 @@
                     {{#link-to 'devices' tagName="li" class="pointer"}}<a><i class="fa fa-th-large"></i><span> Devices</span>
                       </a>{{/link-to}}
 
-                    {{#if application.defaultDevice}}
-                      {{#link-to 'share' tagName="li" class="pointer"}}<a><i class="fa fa-slideshare"></i><span> Media Share</span></a>{{/link-to}}
-                    {{else}}
-                      <li ><a class="inactive-color"><i class="fa fa-slideshare"></i><span> Media Share</span></a></li>
-                    {{/if}}
-
                     {{#link-to 'playlists' tagName="li" class="pointer"}}<a><i class="fa fa-file-text-o"></i><span> Playlists</span></a>{{/link-to}}
                   </ul>
                 </section>

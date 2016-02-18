@@ -1,5 +1,5 @@
 export function initialize(container, application) {
-   application.inject('controller', 'renderer', 'module:renderer');
+   application.inject('controller:player', 'renderer', 'module:renderer');
 }
 
 export default {

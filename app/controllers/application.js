@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
   devicesOnline : 0,
   devicesOffline : 0,
   defaultDevice : Ember.computed.alias('settings.defaultDevice'),
+  player : Ember.inject.controller(),
 
   init : function() {
     this._super();
