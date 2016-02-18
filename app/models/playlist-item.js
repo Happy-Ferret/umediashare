@@ -6,5 +6,6 @@ export default DS.Model.extend({
   localPath : DS.attr('string'),
   remotePath : DS.attr('string'),
   name : DS.attr('string'),
-  contentType : DS.attr('string')
+  contentType : DS.attr('string'),
+  sort : DS.attr('number')
 });

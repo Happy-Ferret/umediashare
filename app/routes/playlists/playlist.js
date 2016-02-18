@@ -6,14 +6,16 @@ export default Ember.Route.extend({
         playlist : this.store.findRecord('playlist', params.id),
         /* localstore has no empty queries support, broken relations ((( */
         playlistItems : new Promise(resolve => {
-          this.store.query('playlistItem', {playlist : params.id}).then(r => resolve(r)).catch(r => resolve());
+          this.store.query('playlistItem', {playlist : params.id})
+          .then(r => resolve(r))
+          .catch(() => resolve());
         })
       });
   },
 
   setupController(controller, model) {
     controller.set('playlist', model.playlist);
-    controller.set('playlistItems', model.playlistItems);
+    controller.set('playlistItemsRaw', model.playlistItems);
 
     model.playlist.set('itemsNum', model.playlistItems ? model.playlistItems.get('length') : 0);
     model.playlist.save();

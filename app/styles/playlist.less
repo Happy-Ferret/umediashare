@@ -15,3 +15,60 @@
   border-width: 4px;
   font-size: 130%;
 }
+
+
+div.playlist-items.box {
+  position: relative;
+  background: none;
+  border-top: none;
+  margin-bottom: 0px;
+  border-radius: 0px;
+  box-shadow: none;
+}
+
+ul.todo-list > li {
+  padding: 0px;
+  background: none;
+  transition: padding-top 0.1s easy-out;
+
+  & > div {
+    pointer-events: none;
+    border-radius: 2px;
+    padding: 10px;
+    background: #f3f4f5;
+    color: #444;
+
+    .tools {
+      pointer-events: all;
+    }
+  }
+
+  &.item-over {
+    padding-top: 60px;
+    transition: padding-top 0.1s ease;
+    border: 1px dashed #aaa;
+  }
+
+  &.item-moving {
+    opacity: 1;
+  }
+
+  &.item-moving-drag {
+    display: none;
+  }
+}
+
+ul.todo-list > li:last-child {
+  //visibility: hidden;
+  margin-top: -3px;
+  opacity: 0;
+  & > div {
+    padding-top: 60px;
+    border: none;
+    background: none;
+  }
+  &.item-over {
+    padding: 0px;
+    opacity: 1;
+  }
+}

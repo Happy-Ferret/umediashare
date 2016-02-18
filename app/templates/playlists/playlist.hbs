@@ -14,6 +14,8 @@
                  <button class="btn btn-success" {{action 'renamePlaylist'}}><i class="fa fa-check"></i></button>
              </div>
         </div>
+        <br />
+        <a href="#" {{action set 'isNameEditor' false}}>Cancel</a>
       {{/unless}}
     </small>
     {{#unless isNameEditor}}
@@ -35,7 +37,7 @@
 
 <section class="content">
 {{#if isCreateItem}}
-  <div class="box box-success">
+  <div class="box box-warning">
     <div class="box-header">
       <div class="box-title col-xs-12" style="font-size: 14px;">
           <i class="fa fa-file"></i> &nbsp; Select files from your computer
@@ -61,7 +63,6 @@
 {{/if}}
 
 {{#unless playlistItems.length}}
-
 <div class="error-page">
     <div class="error-content col-xs-12 text-center" style="margin-left:0px;">
       <br />
@@ -71,32 +72,26 @@
         </p>
     </div>
 </div>
-
 {{else}}
-
 <div class="box box-success">
-  <div class="box-header" style="padding-bottom:0px;">
-    <h3 class="box-title"><i class="fa fa-list"></i> Playlist</h3>
- </div>
-  <div class="box-body no-padding">
-    <table class="table table-condensed">
-        <tbody>
-{{#each playlistItems as |item|}}
-<tr>
 
-  <td width=20></td>
-  {{#if item.isLocal}}
-    <td>{{item.localPath}}</td>
-  {{else}}
-    <td class="pointer" {{action 'play' item}}>{{item.remotePath}}</td>
-  {{/if}}
-  <td width=20><span class="btn btn-danger" {{action "removeItem" item}}><i class="fa fa-times"></i></span></td>
-</tr>
-{{/each}}
-    </tbody></table>
-  </div>
 </div>
 
+<div class="playlist-items box">
+  <ul class="todo-list">
+{{#each playlistItems as |item|}}
+  {{#x-drag-item dataItem=item.id onReorder=reorderItems}}
+   <div>
+    <span class="text">{{item.localPath}}</span>
+    <div class="tools">
+      <i class="fa fa-trash-o" {{action "removeItem" item}}></i>
+    </div>
+   </div>
+  {{/x-drag-item}}
+{{/each}}
+    {{#x-drag-item onReorder=reorderItems}}<div></div>{{/x-drag-item}}
+  </ul>
+</div>
 {{/unless}}
 
 </section>
