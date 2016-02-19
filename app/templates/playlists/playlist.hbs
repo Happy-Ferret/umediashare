@@ -67,13 +67,18 @@
     </div>
 </div>
 {{else}}
-
 <div class="playlist-items box">
   <ul class="todo-list">
 {{#each playlistItems as |item|}}
-  {{#x-drag-item dataItem=item.id onReorder=reorderItems onFileDrop=fileDrop}}
-   <div>
-    <small class="controls"><i class="fa fa-play pointer"></i></small>&nbsp;
+  {{#x-drag-item dataItem=item.id onReorder=reorderItems onFileDrop=fileDrop class=(if item.isPlaying 'item-playing')}}
+   <div >
+    <small class="controls">
+      {{#if item.isPlaying}}
+        <i class="fa fa-stop pointer" {{action 'stop'}}></i>
+      {{else}}
+        <i class="fa fa-play pointer" {{action 'play' item.id}}></i>
+      {{/if}}
+    </small>&nbsp;
     <small>{{lead item.sort}}.</small>
     <span class="text">{{item.name}}</span>
     <small class="pull-right">

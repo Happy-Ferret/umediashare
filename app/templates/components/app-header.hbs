@@ -15,6 +15,41 @@
 
               <div class="navbar-right">
                     <ul class="nav navbar-nav">
+
+                      {{#if application.playlists.length}}
+                      <li class="notifications-menu">
+                        {{#link-to 'playlists.playlist' application.playlist.currentPlaylist class="pointer"}}
+                         <small>{{application.playlist.currentPlaylistRecord.name}} &raquo;</small>
+                        {{/link-to}}
+                      </li>
+                        <li class="dropdown notifications-menu">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <i class="fa fa-tasks"></i>
+                                <span class="label label-default">{{application.playlist.notEmpty.length}}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">{{application.playlist.notEmpty.length}} playlists available</li>
+                                <li>
+                                    <ul class="menu" style="overflow-y: auto; width: 100%; height: 200px;">
+                                       {{#each application.playlists as |playlist|}}
+                                        {{#if playlist.itemsNum}}
+                                            <li class="container" {{action set 'application.playlist.currentPlaylist' playlist.id}}>
+                                                <a class="row" href="">
+                                                    <i class="pull-left fa fa-tasks {{if playlist.isCurrent 'bg-aqua' 'bg-green'}}"></i>
+                                                  <div class="pt-8"><strong>{{playlist.name}}</strong></div>
+                                                    <small>{{playlist.itemsNum}} tracks</small>
+                                                </a>
+                                            </li>
+                                          {{/if}}
+                                        {{/each}}
+                                    </ul>
+                                </li>
+                                <li class="footer">{{#link-to 'playlists'}}View all{{/link-to}}</li>
+                            </ul>
+                        </li>
+                       {{/if}}
+
+
                       {{#if application.devicesOnline}}
                         <li class="dropdown notifications-menu">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -25,18 +60,6 @@
                                 <li class="header">{{application.devicesOnline}} devices online</li>
                                 <li>
                                     <ul class="menu" style="overflow-y: auto; width: 100%; height: 200px;">
-                                      <!-- issue #1 -->
-                                      <!--
-                                      {{#if application.devicesOnline}}
-                                      <li class="container" {{action set 'application.defaultDevice' null}}>
-                                          <a class="row" href="">
-                                              <i class="pull-left fa {{unless application.defaultDevice 'fa-share-alt bg-aqua' 'fa-share-alt bg-green'}}"></i>
-                                            <div class="pt-8"><strong>All</strong></div>
-                                              <small>All available devices</small>
-                                          </a>
-                                      </li>
-                                      {{/if}}
-                                    -->
                                         {{#each application.devices as |dev|}}
                                           {{#if dev.online}}
                                             <li class="container" {{action set 'application.defaultDevice' dev.id}}>

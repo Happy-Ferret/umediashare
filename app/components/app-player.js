@@ -13,6 +13,12 @@ export default Ember.Component.extend({
     play() {
       this.get('player').send('play');
     },
+    stop() {
+      this.get('player').send('stop');
+    },
+    pause() {
+      this.get('player').send('pause');
+    },
     forward() {
       this.get('player').send('forward');
     },

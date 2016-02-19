@@ -4,6 +4,8 @@ export function initialize(container, application) {
    application.inject('component', 'settings', 'module:settings');
    application.inject('module:discovery', 'settings', 'module:settings');
    application.inject('module:renderer', 'settings', 'module:settings');
+   application.inject('module:playlist', 'settings', 'module:settings');
+   application.inject('module:resolver', 'settings', 'module:settings');
 }
 
 export default {

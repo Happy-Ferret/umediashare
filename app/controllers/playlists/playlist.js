@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
   playlistItems : Ember.computed.sort('playlistItemsRaw', 'sortProperties'),
   remoteFile : null,
   isLoading : false,
+  player : Ember.inject.controller(),
 
   createItem : function(file, order) {
     let item =  {
@@ -48,6 +49,13 @@ export default Ember.Controller.extend({
   },
 
   actions : {
+    play : function(id) {
+      this.get('player').send('play', id);
+    },
+
+    stop : function() {
+      this.get('player').send('stop');
+    },
 
     addRemoteFile: function() {
       this.set('isLoading', true);

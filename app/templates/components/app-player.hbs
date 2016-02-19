@@ -1,13 +1,58 @@
 
 <div class="row">
-  <div class="col-xs-2 text-center">
-    <i class="fa fa-play play" {{action 'play'}}></i>
-    <div class="controls pull-right">
-      <i class="fa fa-fast-backward backward" {{action 'backward'}}></i>&nbsp;&nbsp;
-      <i class="fa fa-fast-forward forward" {{action 'forward'}}></i>
+  <div class="col-xs-12">
+    <span class="play-control">
+      {{#if application.player.renderer.isLoading}}
+        <i class="fa fa-circle-o-notch fa-spin play"></i>
+      {{else}}
+        {{#if application.playlist.currentTrack}}
+          <i class="fa fa-stop-circle-o stop" {{action 'stop'}}></i>
+        {{else}}
+          <i class="fa fa-play-circle-o play" {{action 'play'}}></i>
+        {{/if}}
+      {{/if}}
+
+      {{#if application.playlist.currentTrack}}
+        &nbsp;
+        <i class="fa fa-fast-backward backward" {{action 'backward'}}></i>&nbsp;
+        <i class="fa fa-pause pause" {{action 'pause'}}></i>
+        &nbsp;
+        <i class="fa fa-fast-forward forward" {{action 'forward'}}></i>
+      {{/if}}
+    </span>
+
+{{#if player.trackDuration}}
+  {{#if application.playlist.currentTrack}}
+    <div class="seek-control">
+      {{input type="range" min=0 max=player.trackDuration value=player.trackRelTime change=player.seek}}
     </div>
-  </div>
-  <div class="col-xs-2"><small>{{view.player.renderer.mediaInfo.RelTime}}</small></div>
-  <div class="col-xs-6">{{input type="range" min=0 max=view.player.trackDuration value=view.player.trackRelTime class="col-xs-12" change=view.player.seek}}</div>
-  <div class="col-xs-2 text-left"><small>{{view.player.renderer.mediaInfo.TrackDuration}}</small></div>
+    <div class="seek-timer text-center">
+      <small class="pull-left">{{player.renderer.mediaInfo.RelTime}}</small>
+      {{#link-to 'playlists.playlist' application.playlist.currentPlaylist tagName="span" class="pointer"}}
+        {{application.playlist.currentTrackRecord.name}}
+      {{/link-to}}
+      <small class="pull-right">{{player.renderer.mediaInfo.TrackDuration}}</small>
+    </div>
+  {{/if}}
+{{else}}
+<div class="seek-timer text-center">
+  <span>{{application.playlist.currentTrackRecord.name}}</span>
 </div>
+{{/if}}
+ </div>
+</div>
+
+{{#if application.player.renderer.errorMessage}}
+<br /><br />
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+<div class="error-infobox">
+  <div class="alert alert-danger alert-dismissable">
+      <i class="fa fa-warning"></i>
+      <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+      <b>Warning!</b> {{application.player.renderer.errorMessage}}
+  </div>
+</div>
+</div>
+</div>
+{{/if}}

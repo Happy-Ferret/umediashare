@@ -30,13 +30,17 @@ ul.todo-list > li {
   padding: 0px;
   background: none;
   transition: padding-top 0.1s easy-out;
-  border-top: 1px inset #00c0ef;
+
+
+  &.item-playing {
+    border-top: 1px solid #00c0ef;
+  }
 
   & > div {
     pointer-events: none;
     border-radius: 2px;
     padding: 10px;
-    background: #f3f4f5;
+    //background: #f3f4f5;
     color: #444;
 
     .tools , .controls {
