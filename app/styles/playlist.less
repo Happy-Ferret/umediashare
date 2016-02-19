@@ -36,12 +36,21 @@ ul.todo-list > li {
     border-top: 1px solid #00c0ef;
   }
 
+
   & > div {
+    position: relative;
     pointer-events: none;
     border-radius: 2px;
     padding: 10px;
     //background: #f3f4f5;
     color: #444;
+
+    .label.status {
+        color: #444;
+        margin-left: -2px;
+        position: relative;
+        top: -7px;
+    }
 
     .tools , .controls {
       pointer-events: all;

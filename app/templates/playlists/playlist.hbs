@@ -71,7 +71,7 @@
   <ul class="todo-list">
 {{#each playlistItems as |item|}}
   {{#x-drag-item dataItem=item.id onReorder=reorderItems onFileDrop=fileDrop class=(if item.isPlaying 'item-playing')}}
-   <div >
+   <div>
     <small class="controls">
       {{#if item.isPlaying}}
         <i class="fa fa-stop pointer" {{action 'stop'}}></i>
@@ -81,13 +81,11 @@
     </small>&nbsp;
     <small>{{lead item.sort}}.</small>
     <span class="text">{{item.name}}</span>
-    <small class="pull-right">
     {{#if item.isLocal}}
-      <span class="badge bg-blue">local</span>
+      <small class="label status"><i class="fa fa-file-o"></i></small>
     {{else}}
-      <span class="badge bg-yellow">remote</span>
+      <small class="label status"><i class="fa fa-link"></i></small>
     {{/if}}
-  </small>
     <div class="tools">
       <i class="fa fa-trash-o" {{action "removeItem" item}}></i>
     </div>

@@ -15,7 +15,7 @@
       {{#if application.playlist.currentTrack}}
         &nbsp;
         <i class="fa fa-fast-backward backward" {{action 'backward'}}></i>&nbsp;
-        <i class="fa fa-pause pause" {{action 'pause'}}></i>
+        <i class="fa {{if player.isPaused 'fa-play' 'fa-pause'}} pause" {{action 'pause'}}></i>
         &nbsp;
         <i class="fa fa-fast-forward forward" {{action 'forward'}}></i>
       {{/if}}
@@ -36,7 +36,9 @@
   {{/if}}
 {{else}}
 <div class="seek-timer text-center">
-  <span>{{application.playlist.currentTrackRecord.name}}</span>
+  {{#link-to 'playlists.playlist' application.playlist.currentPlaylist tagName="span" class="pointer"}}
+    {{application.playlist.currentTrackRecord.name}}
+  {{/link-to}}
 </div>
 {{/if}}
  </div>

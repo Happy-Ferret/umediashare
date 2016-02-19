@@ -33,7 +33,7 @@ export default Ember.Object.extend({
   statusUpdateur: function() {
     this.set('upRepeater', setInterval(() => {
         this.updateStatus.call(this);
-      }, 1000));
+      }, 1200));
   }.observes('device'),
 
   updateStatus : function() {
@@ -58,6 +58,12 @@ export default Ember.Object.extend({
    });
  },
 
+ pause : function() {
+   this.get('renderer').pause((err) =>  {
+     if (err) { this.set('errorMessage', err.toString()); }
+   });
+ },
+
  stop: function() {
    this.lookupRenderer();
    if (this.get('renderer')) {
@@ -67,29 +73,25 @@ export default Ember.Object.extend({
    this.set('isLoading', false);
  },
 
- load : function(url) {
+ load : function(url, contentType) {
     if (!url || !url.match(/.*\/(.*)$/)) {
+      this.set('errorMessage', 'Invalid source url: ' + url);
       return;
     }
 
     var renderer = this.lookupRenderer();
     if (!renderer) {
+      this.set('errorMessage', 'Cannot lookup renderer');
       return;
     }
 
     this.set('isLoading', true);
-    return new Ember.RSVP.Promise((resolve, reject) => {
-       this.lookupOptions(url).then((options) => {
-          renderer.load(url, options, (err) => {
-              this.set('isLoading', false);
-              if(err) {
-                this.set('errorMessage', err.toString());
-                reject();
-              } else {
-                resolve();
-              }
-            });
-      });
+    renderer.load(url, this.lookupOptions(url, contentType), (err) => {
+        this.set('isLoading', false);
+
+        if(err) {
+          this.set('errorMessage', err.toString());
+        }
     });
   },
 
@@ -118,26 +120,16 @@ export default Ember.Object.extend({
 
 
 
-  lookupOptions : function(url) {
-    return new Ember.RSVP.Promise((resolve, reject) => {
-      Ember.$.ajax({
-        type : 'HEAD',
-        url : url,
-        complete: (a) => {
-            var contentType = a.getResponseHeader('Content-Type');
-            if (!contentType) { reject(null); }
-
-             resolve({
-              autoplay: true,
-              contentType: contentType,
-              metadata: {
-                title: url.match(/.*\/(.*)$/)[1],
-                type: contentType.split('/')[0],
-                protocolInfo : 'http-get:*:'+contentType+':*'
-              }
-            });
-        }});
-      }, `http resource information lookup: ${url}`);
+  lookupOptions : function(url, contentType) {
+    return {
+            autoplay: true,
+            contentType: contentType,
+            metadata: {
+              title: url.match(/.*\/(.*)$/)[1],
+              type: contentType.split('/')[0],
+              protocolInfo : 'http-get:*:'+contentType+':*'
+            }
+    };
   }
 
 });
