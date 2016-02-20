@@ -72,9 +72,7 @@ export default Ember.Object.extend({
   playlistObserver : function() {
     if (this.get('currentPlaylist')) {
       this.store.query('playlistItem', {'playlist': this.get('currentPlaylist')})
-        .then( r => {
-          this.set('playlistItems', r)
-        });
+        .then( r => this.set('playlistItems', r));
     } else {
       this.set('playlistItems', null);
     }

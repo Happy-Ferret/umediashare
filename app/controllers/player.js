@@ -7,6 +7,8 @@ export default Ember.Controller.extend({
   trackRelTime : 0,
   isPlaying : false,
   isPaused : false,
+  isLoading : Ember.computed.alias('renderer.isMediaLoading'),
+  errorMessage : Ember.computed.alias('renderer.errorMessage'),
 
   seek: function(e) {
     this.get('application.player.renderer').seek(e.target.value);
@@ -28,11 +30,13 @@ export default Ember.Controller.extend({
           this.get('playlist.currentTrackRecord.contentType')
         );
       }
+
+      this.set('isPaused', false);
     },
 
     pause : function() {
       if (this.get('isPaused')) {
-        this.send('play');
+        this.get('renderer').unpause();
       } else {
         this.get('renderer').pause();
       }
@@ -40,6 +44,7 @@ export default Ember.Controller.extend({
     },
 
     stop : function() {
+      this.set('isPaused', false);
       this.set('playlist.currentTrack', null);
       this.get('renderer').stop();
     },

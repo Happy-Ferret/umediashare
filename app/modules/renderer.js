@@ -1,19 +1,3 @@
-import Ember from 'ember';
-
-export default Ember.Object.extend({
-
-  errorMessage : null,
-  isLoading : false,
-  device : null,
-  renderer : null,
-  upRepeater : null,
-
-  mediaInfo : Ember.Object.create(),
-
-  isError : function() {
-    return this.get('errorMessage') ? true : false;
-  }.property('errorMessage'),
-
 /*
   AbsCount: "0"
   AbsTime: "NOT_IMPLEMENTED"
@@ -24,17 +8,26 @@ export default Ember.Object.extend({
   TrackMetaData: "<DIDL-Lite xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:dlna="urn:schemas-dlna-org:metadata-1-0/"><item id="0" parentID="34" restricted="0"><dc:title>222397405</dc:title><dc:creator>-</dc:creator><upnp:genre>Unknown</upnp:genre><res protocolInfo="http-get:*:video/x-matroska:*">http://www.ex.ua/get/222397405</res><upnp:class>object.item.videoItem.movie</upnp:class></item></DIDL-Lite>"
   TrackURI: "http://www.ex.ua/get/222397405" */
 
-  defaultDeviceObserver : function() {
-    this.stop();
-    this.lookupRenderer();
-    this.updateStatus();
-  }.observes('settings.defaultDevice'),
+import Ember from 'ember';
+
+export default Ember.Object.extend({
+  errorMessage : null,
+  device : null,
+  renderer : null,
+  upRepeater : null,
+  isMediaLoading : false,
+  mediaInfo : Ember.Object.create(),
+
+  init : function() {
+      this._super();
+      this.statusUpdateur();
+  },
 
   statusUpdateur: function() {
     this.set('upRepeater', setInterval(() => {
-        this.updateStatus.call(this);
-      }, 1200));
-  }.observes('device'),
+      Ember.run.debounce(this, 'updateStatus', 800);
+    }, 1500));
+  },
 
   updateStatus : function() {
     var client = this.get('device.client');
@@ -47,8 +40,6 @@ export default Ember.Object.extend({
           this.get('mediaInfo').setProperties(result);
         }
       });
-    } else {
-      clearInterval(this.get('upRepeater'));
     }
   },
 
@@ -64,41 +55,47 @@ export default Ember.Object.extend({
    });
  },
 
+ unpause : function() {
+   this.get('renderer').play((err) =>  {
+     if (err) { this.set('errorMessage', err.toString()); }
+   });
+ },
+
  stop: function() {
    this.lookupRenderer();
    if (this.get('renderer')) {
      this.get('renderer').stop();
    }
    this.set('device', null);
-   this.set('isLoading', false);
  },
 
  load : function(url, contentType) {
-    if (!url || !url.match(/.*\/(.*)$/)) {
-      this.set('errorMessage', 'Invalid source url: ' + url);
-      return;
-    }
-
     var renderer = this.lookupRenderer();
     if (!renderer) {
       this.set('errorMessage', 'Cannot lookup renderer');
       return;
     }
 
-    this.set('isLoading', true);
-    renderer.load(url, this.lookupOptions(url, contentType), (err) => {
-        this.set('isLoading', false);
+    this.set('isMediaLoading', true);
 
+    renderer.load(url, this.lookupOptions(url, contentType), (err) => {
         if(err) {
           this.set('errorMessage', err.toString());
         }
+        this.set('isMediaLoading', false);
     });
   },
 
   lookupRenderer : function() {
+      if (this.get('renderer')) {
+        this.get('renderer').stop();
+      }
       this.set('errorMessage', null);
       this.set('device', null);
       this.set('renderer', null);
+      Object.keys(this.get('mediaInfo')).forEach( a => {
+        this.set(`mediaInfo.${a}`, null);
+      });
       var device = null;
       var renderer = null;
 
@@ -117,8 +114,6 @@ export default Ember.Object.extend({
 
       return renderer;
   },
-
-
 
   lookupOptions : function(url, contentType) {
     return {

@@ -2,21 +2,24 @@
 <div class="row">
   <div class="col-xs-12">
     <span class="play-control">
-      {{#if application.player.renderer.isLoading}}
-        <i class="fa fa-circle-o-notch fa-spin play"></i>
-      {{else}}
-        {{#if application.playlist.currentTrack}}
-          <i class="fa fa-stop-circle-o stop" {{action 'stop'}}></i>
+      {{#if application.devicesOnline}}
+        {{#if application.player.isLoading}}
+          <i class="fa fa-circle-o-notch fa-spin play"></i>
         {{else}}
-          <i class="fa fa-play-circle-o play" {{action 'play'}}></i>
+          {{#if application.playlist.currentTrack}}
+            <i class="fa fa-stop-circle-o stop" {{action 'stop'}}></i>
+          {{else}}
+            <i class="fa fa-play-circle-o play" {{action 'play'}}></i>
+          {{/if}}
         {{/if}}
+      {{else}}
+        <i class="fa fa-warning play"></i>
       {{/if}}
 
       {{#if application.playlist.currentTrack}}
         &nbsp;
+        <i class="fa {{if player.isPaused 'fa-play' 'fa-pause'}} pause" {{action 'pause'}}></i>&nbsp;
         <i class="fa fa-fast-backward backward" {{action 'backward'}}></i>&nbsp;
-        <i class="fa {{if player.isPaused 'fa-play' 'fa-pause'}} pause" {{action 'pause'}}></i>
-        &nbsp;
         <i class="fa fa-fast-forward forward" {{action 'forward'}}></i>
       {{/if}}
     </span>
@@ -44,7 +47,7 @@
  </div>
 </div>
 
-{{#if application.player.renderer.errorMessage}}
+{{#if application.player.errorMessage}}
 <br /><br />
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
@@ -52,7 +55,7 @@
   <div class="alert alert-danger alert-dismissable">
       <i class="fa fa-warning"></i>
       <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-      <b>Warning!</b> {{application.player.renderer.errorMessage}}
+      <b>Warning!</b> {{application.player.errorMessage}}
   </div>
 </div>
 </div>

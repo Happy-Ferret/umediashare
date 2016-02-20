@@ -5,7 +5,6 @@ var os = require('os');
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
-var bind_port = 8001;
 
 export default Ember.Object.extend({
   playlistItems : null,
@@ -37,8 +36,7 @@ export default Ember.Object.extend({
            response.writeHead(200, {
              "Content-Type": item.get('contentType')
            });
-           let stream = fs.createReadStream(filename, { bufferSize: 64 * 1024 });
-           stream.pipe(response);
+           fs.createReadStream(filename).pipe(response);
         }
      });
    }).listen(this.get('serverPort'));
