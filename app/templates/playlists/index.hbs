@@ -21,25 +21,12 @@ Media
 <section class="content">
   <div class="row">
   {{#each model as |playlist|}}
-    <div class="col-lg-3 col-xs-6">
-      <div class="small-box {{if playlist.selected 'bg-aqua' 'bg-green'}} pointer" {{action 'toggleSelection' playlist}}>
-          <div class="inner">
-              <h3><sup style="font-size: 20px">{{playlist.itemsNum}} </sup></h3>
-                <p>
-                    {{playlist.name}}
-                </p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-align-justify"></i>
-            </div>
-            {{#link-to 'playlists.playlist' playlist.id class="small-box-footer" bubbles=false}}
-                Edit playlist <i class="fa fa-arrow-circle-right"></i>
-            {{/link-to}}
-        </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center">
+      {{#link-to 'playlists.playlist' playlist.id}}
+        {{app-playlist-badge playlist=playlist model=model}}
+      {{/link-to}}
     </div>
-
     {{else}}
-
     <div class="error-page">
         <div class="error-content col-xs-12 text-center" style="margin-left:0px;">
           <br />

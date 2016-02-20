@@ -16,9 +16,11 @@
 
                       {{#if application.playlists.length}}
                       <li class="notifications-menu">
-                        {{#link-to 'playlists.playlist' application.playlist.currentPlaylist class="pointer"}}
-                         <small>{{application.playlist.currentPlaylistRecord.name}} &raquo;</small>
-                        {{/link-to}}
+                        {{#if application.playlist.currentPlaylist}}
+                          {{#link-to 'playlists.playlist' application.playlist.currentPlaylist class="pointer"}}
+                           <small>{{application.playlist.currentPlaylistRecord.name}} &raquo;</small>
+                          {{/link-to}}
+                        {{/if}}
                       </li>
                         <li class="dropdown notifications-menu">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">

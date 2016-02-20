@@ -1,0 +1,16 @@
+
+<small class="label label-success items-badge">{{playlist.itemsNum}} files</small>
+
+  <span class="badge bg-red pull-right remove" {{action 'removePlaylist' playlist bubbles=false}}>
+    &times;
+  </span>
+
+  <div class="playlist-types">
+    {{#each itemTypes.content as |type|}}
+      <i class="fa fa-file-{{type}}-o"></i>
+    {{/each}}
+  </div>
+
+  <div class="playlist-controls">
+    <h3><span class="label label-default">{{playlist.name}}</span></h3>
+  </div>

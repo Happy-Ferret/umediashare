@@ -18,13 +18,15 @@
 
       {{#if application.playlist.currentTrack}}
         &nbsp;
-        <i class="fa {{if player.isPaused 'fa-play' 'fa-pause'}} pause" {{action 'pause'}}></i>&nbsp;
-        <i class="fa fa-fast-backward backward" {{action 'backward'}}></i>&nbsp;
-        <i class="fa fa-fast-forward forward" {{action 'forward'}}></i>
+        {{#if application.playlist.currentTrackIsMovie}}
+          <i class="fa {{if player.isPaused 'fa-play' 'fa-pause'}} pause" {{action 'pause'}}></i>&nbsp;
+        {{/if}}
+        <i class="fa fa-fast-backward backward {{unless application.playlist.currentTrackIsMovie 'huge'}}" {{action 'backward'}}></i>&nbsp;
+        <i class="fa fa-fast-forward forward {{unless application.playlist.currentTrackIsMovie 'huge'}}" {{action 'forward'}}></i>
       {{/if}}
     </span>
 
-{{#if player.trackDuration}}
+{{#if application.playlist.currentTrackIsMovie}}
   {{#if application.playlist.currentTrack}}
     <div class="seek-control">
       {{input type="range" min=0 max=player.trackDuration value=player.trackRelTime change=player.seek}}
@@ -32,16 +34,18 @@
     <div class="seek-timer text-center">
       <small class="pull-left">{{player.renderer.mediaInfo.RelTime}}</small>
       {{#link-to 'playlists.playlist' application.playlist.currentPlaylist tagName="span" class="pointer"}}
-        {{application.playlist.currentTrackRecord.name}}
+        {{lead application.playlist.currentTrackRecord.sort}}. {{application.playlist.currentTrackRecord.name}}
       {{/link-to}}
       <small class="pull-right">{{player.renderer.mediaInfo.TrackDuration}}</small>
     </div>
   {{/if}}
 {{else}}
 <div class="seek-timer text-center">
-  {{#link-to 'playlists.playlist' application.playlist.currentPlaylist tagName="span" class="pointer"}}
-    {{application.playlist.currentTrackRecord.name}}
-  {{/link-to}}
+  {{#if application.playlist.currentTrack}}
+    {{#link-to 'playlists.playlist' application.playlist.currentPlaylist tagName="span" class="pointer"}}
+      {{lead application.playlist.currentTrackRecord.sort}}. {{application.playlist.currentTrackRecord.name}}
+    {{/link-to}}
+  {{/if}}
 </div>
 {{/if}}
  </div>

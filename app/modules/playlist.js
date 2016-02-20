@@ -44,6 +44,13 @@ export default Ember.Object.extend({
     return this.get('playlistItems').filter( i => i.get('sort') === sort)[0];
   },
 
+  currentTrackIsMovie : function() {
+      if (this.get('currentTrack')) {
+        return this.get('currentTrackRecord.contentType').indexOf('video') !== -1;
+      }
+      return false;
+  }.property('currentTrack'),
+
   currentTrackURI : function() {
     if (this.get('currentTrack')) {
       return this.store.peekRecord('playlistItem', this.get('currentTrack')).get('remotePath');

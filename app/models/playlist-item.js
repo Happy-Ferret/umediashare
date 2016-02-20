@@ -12,5 +12,9 @@ export default DS.Model.extend({
 
   isPlaying : function() {
     return Ums.get('application.playlist.currentTrack') === this.get('id');
-  }.property('Ums.application.playlist.currentTrack')
+  }.property('Ums.application.playlist.currentTrack'),
+
+  type : function() {
+    return this.get('contentType').match(/^(\w+)\/.*$/)[1];
+  }.property('contentType')
 });
