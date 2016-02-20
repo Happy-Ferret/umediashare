@@ -55,7 +55,9 @@ export default Ember.Component.extend({
     target = this.$().attr('dataitem');
 
     if (src && src[0] === 'playlist') {
-      this.get('application.playlist').mergePlaylists(src[1], target);
+      if (src[1] !== target && confirm('Merge Playlists ?')) {
+        this.get('application.playlist').mergePlaylists(src[1], target);
+      }
     }
 
     this.set('itemMoving', false);
@@ -93,6 +95,7 @@ export default Ember.Component.extend({
     },
 
     removePlaylist : function(playlist) {
+      if (confirm('Delete Playlist ?')) {
         if (this.get('playlist.currentPlaylist') === playlist.get('id')) {
           this.set('playlist.currentPlaylist', null);
         }
@@ -106,6 +109,7 @@ export default Ember.Component.extend({
 
         playlist.destroyRecord();
         playlist.save();
+      }
     }
   }
 });

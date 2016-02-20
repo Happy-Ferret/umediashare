@@ -9,6 +9,40 @@ export default Ember.Controller.extend({
   isPaused : false,
   isLoading : Ember.computed.alias('renderer.isMediaLoading'),
   errorMessage : Ember.computed.alias('renderer.errorMessage'),
+  updateur : null,
+  ticks : 0,
+  lastTime : 0,
+
+
+  nextTrackWatchStart : function() {
+    this.nextTrackWatchStop();
+    let interval = setInterval(() => {
+      let type = this.get('application.playlist.currentTrackRecord.type');
+
+      if (type !== 'audio' && type !== 'video') {
+        return;
+      }
+
+      this.incrementProperty('ticks');
+
+      if (this.get('lastTime') !== this.get('trackRelTime')) {
+        this.set('lastTime', this.get('trackRelTime'));
+        this.set('ticks', 0);
+      }
+
+      if (this.get('ticks') > 10 && this.get('trackRelTime') > 0) {
+        this.send('forward');
+      }
+
+    },400);
+    this.set('updateur', interval);
+  },
+
+  nextTrackWatchStop : function() {
+    clearInterval(this.get('updateur'));
+    this.set('ticks', 0);
+    this.set('lastTime', 0);
+  },
 
   seek: function(e) {
     this.get('application.player.renderer').seek(e.target.value);
@@ -29,6 +63,7 @@ export default Ember.Controller.extend({
           this.get('playlist.currentTrackURI'),
           this.get('playlist.currentTrackRecord.contentType')
         );
+        this.nextTrackWatchStart();
       }
 
       this.set('isPaused', false);
@@ -37,8 +72,10 @@ export default Ember.Controller.extend({
     pause : function() {
       if (this.get('isPaused')) {
         this.get('renderer').unpause();
+        this.nextTrackWatchStart();
       } else {
         this.get('renderer').pause();
+        this.nextTrackWatchStop();
       }
       this.toggleProperty('isPaused');
     },
@@ -47,6 +84,7 @@ export default Ember.Controller.extend({
       this.set('isPaused', false);
       this.set('playlist.currentTrack', null);
       this.get('renderer').stop();
+      this.nextTrackWatchStop();
     },
 
     forward : function() {
@@ -54,6 +92,7 @@ export default Ember.Controller.extend({
         this.get('playlist').setupRecord(this.get('playlist.nextTrack')),
         this.get('playlist.currentTrackRecord.contentType')
       );
+      this.nextTrackWatchStart();
     },
 
     backward : function() {
@@ -61,6 +100,7 @@ export default Ember.Controller.extend({
         this.get('playlist').setupRecord(this.get('playlist.prevTrack')),
         this.get('playlist.currentTrackRecord.contentType')
       );
+      this.nextTrackWatchStart();
     }
   },
 

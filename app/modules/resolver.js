@@ -22,6 +22,13 @@ export default Ember.Object.extend({
      let item = this.get('playlistItems')
         .filter( i => i.get('isLocal') && i.get('remotePath').indexOf(uri) !== -1)
         .get('0');
+
+      if (!item) {
+        response.writeHead(404, {
+          "Content-Type": "text/plain"
+        });
+        response.end();
+      }
     let filename = item.get('localPath');
 
      fs.exists(filename, function (exists) {

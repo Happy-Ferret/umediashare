@@ -17,7 +17,7 @@ Folder
 <section class="content">
   <div class="row">
   {{#each model as |playlist|}}
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 text-center">
       {{#link-to 'playlists.playlist' playlist.id}}
         {{app-playlist-badge playlist=playlist model=model}}
       {{/link-to}}
