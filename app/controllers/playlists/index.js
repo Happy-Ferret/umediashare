@@ -2,9 +2,6 @@ import Ember from 'ember';
 import hash from '../../utils/utility-hash';
 
 export default Ember.Controller.extend({
-  isSelected : function() {
-    return !!this.model.filter(p => p.get('selected')).length;
-  }.property('model.@each.selected'),
 
   actions : {
     createPlaylist : function() {

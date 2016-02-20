@@ -35,7 +35,7 @@
                                         {{#if playlist.itemsNum}}
                                             <li class="container" {{action set 'application.playlist.currentPlaylist' playlist.id}}>
                                                 <a class="row" href="">
-                                                    <i class="pull-left fa fa-tasks {{if playlist.isCurrent 'bg-aqua' 'bg-green'}}"></i>
+                                                    <i class="pull-left fa fa-file-{{playlist.itemTypes.content.[0]}}-o {{if playlist.isCurrent 'bg-aqua' 'bg-green'}}"></i>
                                                   <div class="pt-8"><strong>{{playlist.name}}</strong></div>
                                                     <small>{{playlist.itemsNum}} tracks</small>
                                                 </a>
@@ -64,7 +64,7 @@
                                           {{#if dev.online}}
                                             <li class="container" {{action set 'application.defaultDevice' dev.id}}>
                                                 <a class="row" href="">
-                                                    <i class="pull-left fa {{if dev.isDefault 'fa-chain bg-aqua' 'fa-chain bg-green'}}"></i>
+                                                    <i class="pull-left fa {{if dev.isDefault 'fa-chain bg-aqua' 'fa-bookmark-o bg-green'}}"></i>
                                                   <div class="pt-8"><strong>{{dev.modelName}}</strong></div>
                                                     <small>{{dev.friendlyName}}</small>
                                                     <small>{{dev.modelDescription}}</small>

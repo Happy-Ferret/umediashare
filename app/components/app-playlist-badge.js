@@ -70,19 +70,6 @@ export default Ember.Component.extend({
     }
   },
 
-  itemTypes : function() {
-    let types = new Set();
-
-    return DS.PromiseObject.create({
-       promise : this.get('model.store').query('playlistItem', {playlist : this.get('playlist.id')}).then( r => {
-                  r.forEach( i => {
-                    types.add(i.get('type'));
-                  });
-                 return types;
-              })
-    });
-  }.property('model', 'playlist.itemsNum'),
-
   actions : {
     toggleSelection : function(playlist) {
       this.get('model').filter(p => p.get('selected')).forEach(p => {
