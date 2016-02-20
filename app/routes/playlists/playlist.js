@@ -19,11 +19,17 @@ export default Ember.Route.extend({
 
     model.playlist.set('itemsNum', model.playlistItems ? model.playlistItems.get('length') : 0);
     model.playlist.save();
+
+    controller.set('application.playlist.currentPlaylist', model.playlist.get('id'));
   },
 
   actions: {
     resetRoute: function() {
       this.refresh();
+    },
+
+    didTransition : function() {
+      this.set('controller.showBack', false);
     }
   }
 });

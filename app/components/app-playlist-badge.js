@@ -1,11 +1,72 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
-
 export default Ember.Component.extend({
   classNames : ['playlist-badge', 'pointer'],
-  attributeBindings : ['draggable'],
-  draggable : false,
+  attributeBindings : ['draggable', 'dataItem'],
+  classNameBindings : ['itemMoving', 'itemMovingOver'],
+  itemMoving : false,
+  itemMovingOver : false,
+  draggable : true,
+  dataItem : Ember.computed.alias('playlist.id'),
+
+  dragStart : function(event) {
+    event.originalEvent.dataTransfer.setData('text/plain', 'playlist,' + this.$().attr('dataitem'));
+    setTimeout(() => this.set('itemMoving', true), 0);
+  },
+
+  dragOver : function(event) {
+    event.preventDefault();
+    this.set('itemMovingOver', true);
+  },
+
+  dragEnter : function(event) {
+    this.cancelDragEvent();
+
+    let dragDebounce =
+    Ember.run.debounce(this, function(data) {
+      let source = data.split(',');
+
+      if (this.$() && this.$().attr('dataitem')) {
+
+        if ((source[0] === 'item' && source[1]) || source[0] !== 'playlist') {
+            this.get('application').transitionToRoute('playlists.playlist', this.$().attr('dataitem'));
+        }
+
+      }
+    }, event.originalEvent.dataTransfer.getData('text/plain'), 1000);
+
+    this.set('application.playlistsDragOverdebounce', dragDebounce);
+  },
+
+  dragLeave : function() {
+    this.set('itemMovingOver', false);
+  },
+
+  dragEnd : function() {
+    this.cancelDragEvent();
+    this.set('itemMoving', false);
+  },
+
+  drop : function(event) {
+    this.cancelDragEvent();
+
+    let src = event.originalEvent.dataTransfer.getData('text/plain').split(','),
+    target = this.$().attr('dataitem');
+
+    if (src && src[0] === 'playlist') {
+      this.get('application.playlist').mergePlaylists(src[1], target);
+    }
+
+    this.set('itemMoving', false);
+    this.set('itemMovingOver', false);
+  },
+
+  cancelDragEvent : function() {
+    if (this.get('application.playlistsDragOverdebounce')) {
+      Ember.run.cancel(this.get('application.playlistsDragOverdebounce'));
+    }
+  },
 
   itemTypes : function() {
     let types = new Set();
@@ -18,7 +79,7 @@ export default Ember.Component.extend({
                  return types;
               })
     });
-  }.property('model'),
+  }.property('model', 'playlist.itemsNum'),
 
   actions : {
     toggleSelection : function(playlist) {

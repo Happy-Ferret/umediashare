@@ -42,7 +42,7 @@ export default Ember.Component.extend({
   },
 
   dragStart(event) {
-    event.originalEvent.dataTransfer.setData('text/plain', this.$().attr('id'));
+    event.originalEvent.dataTransfer.setData('text/plain', 'item,' + this.$().attr('dataItem'));
     set(this, 'itemMoving', true);
     setTimeout(() => set(this, 'itemMovingDrag', true), 0);
   },
@@ -67,9 +67,16 @@ export default Ember.Component.extend({
         this.onFileDrop(event, this.getItemOrder(event.currentTarget));
       }
     } else {
-      Ember.$(`#${event.originalEvent.dataTransfer.getData('text/plain')}`).insertBefore(this.$());
-      if (this.get('onReorder')) {
-        this.onReorder(this.createItemsOrderList());
+      let item = event.originalEvent.dataTransfer.getData('text/plain').split(',')[1];
+
+      /* it is an item from another playlist */
+      if (Ember.$(`[dataitem=${item}]`).length === 0 &&  this.get('onItemMoved')) {
+          this.onItemMoved(item, this.getItemOrder(this.$()));
+      } else {
+        Ember.$(`[dataitem=${item}]`).insertBefore(this.$());
+        if (this.get('onReorder')) {
+          this.onReorder(this.createItemsOrderList());
+        }
       }
     }
 
