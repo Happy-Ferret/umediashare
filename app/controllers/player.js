@@ -30,7 +30,8 @@ export default Ember.Controller.extend({
         this.set('ticks', 0);
       }
 
-      if (this.get('ticks') > 10 && this.get('trackRelTime') > 0) {
+      if (this.get('ticks') > 10 && this.get('trackRelTime') === 0) {
+        this.nextTrackWatchStop();
         this.send('forward');
       }
 
@@ -61,9 +62,9 @@ export default Ember.Controller.extend({
       if (this.get('playlist.currentTrackURI')) {
         this.get('renderer').load(
           this.get('playlist.currentTrackURI'),
-          this.get('playlist.currentTrackRecord.contentType')
+          this.get('playlist.currentTrackRecord.contentTypeFix'),
+          this.nextTrackWatchStart.bind(this)
         );
-        this.nextTrackWatchStart();
       }
 
       this.set('isPaused', false);
@@ -90,17 +91,17 @@ export default Ember.Controller.extend({
     forward : function() {
       this.get('renderer').load(
         this.get('playlist').setupRecord(this.get('playlist.nextTrack')),
-        this.get('playlist.currentTrackRecord.contentType')
+        this.get('playlist.currentTrackRecord.contentTypeFix'),
+        this.nextTrackWatchStart.bind(this)
       );
-      this.nextTrackWatchStart();
     },
 
     backward : function() {
       this.get('renderer').load(
         this.get('playlist').setupRecord(this.get('playlist.prevTrack')),
-        this.get('playlist.currentTrackRecord.contentType')
+        this.get('playlist.currentTrackRecord.contentTypeFix'),
+        this.nextTrackWatchStart.bind(this)
       );
-      this.nextTrackWatchStart();
     }
   },
 

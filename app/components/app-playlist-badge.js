@@ -31,7 +31,6 @@ export default Ember.Component.extend({
         if ((source[0] === 'item' && source[1]) || source[0] !== 'playlist') {
             this.get('application').transitionToRoute('playlists.playlist', this.$().attr('dataitem'));
         }
-
       }
     }, event.originalEvent.dataTransfer.getData('text/plain'), 1000);
 

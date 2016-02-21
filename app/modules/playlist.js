@@ -72,7 +72,7 @@ export default Ember.Object.extend({
 
   currentTrackURI : function() {
     if (this.get('currentTrack')) {
-      return this.store.peekRecord('playlistItem', this.get('currentTrack')).get('remotePath');
+      return this.store.peekRecord('playlistItem', this.get('currentTrack')).get('remotePathFix');
     }
     return null;
   }.property('currentTrack'),

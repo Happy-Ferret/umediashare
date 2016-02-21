@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import hash from '../utils/utility-hash';
 
 var os = require('os');
 var http = require('http');
@@ -8,8 +7,9 @@ var url = require('url');
 
 export default Ember.Object.extend({
   playlistItems : null,
-  serverAddress : null,
+  serverAddress : Ember.computed.alias('settings.serverAddress'),
   serverPort : Ember.computed.alias('settings.serverPort'),
+  server : null,
 
 
   startServer : function() {
@@ -17,36 +17,38 @@ export default Ember.Object.extend({
       this.set('serverPort', 8888);
     }
 
-    http.createServer((request, response) => {
-     let uri = url.parse(request.url).pathname.replace(/^\//,'');
-     let item = this.get('playlistItems')
-        .filter( i => i.get('isLocal') && i.get('remotePath').indexOf(uri) !== -1)
-        .get('0');
+    this.set('server',
+        http.createServer((request, response) => {
+         let uri = url.parse(request.url).pathname.replace(/^\//,'');
+         let item = this.get('playlistItems')
+            .filter( i => i.get('isLocal') && i.get('remotePathFix').indexOf(uri) !== -1)
+            .get('0');
 
-      if (!item) {
-        response.writeHead(404, {
-          "Content-Type": "text/plain"
-        });
-        response.end();
-      }
-    let filename = item.get('localPath');
+          if (!item) {
+            response.writeHead(404, {
+              "Content-Type": "text/plain"
+            });
+            response.end();
+          }
+        let filename = item.get('localPath');
 
-     fs.exists(filename, function (exists) {
-         if (!exists) {
-           response.writeHead(404, {
-             "Content-Type": "text/plain"
-           });
-           response.write("404 Not Found\n");
-           response.end();
-           return;
-         } else{
-           response.writeHead(200, {
-             "Content-Type": item.get('contentType')
-           });
-           fs.createReadStream(filename).pipe(response);
-        }
-     });
-   }).listen(this.get('serverPort'));
+         fs.exists(filename, function (exists) {
+             if (!exists) {
+               response.writeHead(404, {
+                 "Content-Type": "text/plain"
+               });
+               response.write("404 Not Found\n");
+               response.end();
+               return;
+             } else{
+               response.writeHead(200, {
+                 "Content-Type": item.get('contentTypeFix')
+               });
+               fs.createReadStream(filename).pipe(response);
+            }
+         });
+       }).listen(this.get('serverPort'))
+     );
   },
 
   lookupInterface : function() {
@@ -59,8 +61,7 @@ export default Ember.Object.extend({
         }
 
         if (alias >= 1) {
-          //handle aliases
-          //console.log(ifname + ':' + alias, iface.address);
+
         } else {
           this.set('serverAddress', iface.address);
         }
@@ -72,16 +73,10 @@ export default Ember.Object.extend({
 
   init : function() {
     this.set('playlistItems', this.store.peekAll('playlistItem'));
-    this.lookupInterface();
+    if (!this.get('serverAddress')) {
+      this.lookupInterface();
+    }
     this.startServer();
-  },
-
-  playlistsObserver : function() {
-      this.get('playlistItems')
-        .filter( r => r.get('isLocal'))
-        .forEach( r => r.set('remotePath',
-         `http://${this.get('serverAddress')}:${this.get('serverPort')}/${hash(r.get('localPath'))}`
-        ).save());
-  }.observes('playlistItems.[]', 'playlistItems')
+  }
 
 });

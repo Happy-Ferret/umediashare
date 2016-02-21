@@ -1,8 +1,107 @@
 <section class="content-header">
-<h1>
-Dashboard
-<small>Control panel</small>
-</h1>
+  <h1>
+    Dashboard
+    <small>Control panel</small>
+  </h1>
+</section>
 
 
+<section class="content">
+
+<div class="row">
+
+<div class="col-xs-12 col-md-6">
+  <div class="box box-success">
+    <div class="box-header">
+      <span class="box-title" style="font-size: 14px;">
+        <i class="fa fa-wifi"></i>  HTTP service configuration
+      </span>
+    </div>
+
+    <div class="box-body">
+
+       <div>
+          <span>HTTP Server Port </span>
+          <div class="input-group">
+             {{input type="text" placeholder="http port" class="form-control" value=serverPort }}
+             <div class="input-group-btn">
+                 <button class="btn btn-success" {{action 'restartHttp'}}><i class="fa fa-check"></i></button>
+             </div>
+          </div>
+       </div>
+        <br />
+       <div>
+          <span>HTTP Server Address </span>
+          <div class="input-group">
+             {{input type="text" placeholder="http port" class="form-control" value=serverAddress }}
+             <div class="input-group-btn">
+                 <button class="btn btn-success" {{action 'restartHttp'}}><i class="fa fa-check"></i></button>
+             </div>
+          </div>
+       </div>
+    </div>
+
+    <div class="box-body">
+      <p class="box-title" style="font-size: 14px;">
+        <i class="fa fa-wifi"></i>  Available devices
+      </p>
+
+      {{#each application.devices as |dev|}}
+          {{#if dev.online}}
+            <div class="btn btn-block {{if dev.isDefault 'bg-aqua' 'bg-green'}}" {{action set 'application.defaultDevice' dev.id}}>
+              <div class="col-xs-2">
+                <h1><i class="fa {{if dev.isDefault 'fa-chain' 'fa-bookmark-o'}}"></i></h1>
+              </div>
+              <div class="col-xs-10 text-left">
+              <strong>{{dev.modelName}}</strong>
+              <div>
+                <small>{{dev.friendlyName}}</small>
+              </div>
+              <small>{{dev.modelDescription}}</small>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          {{/if}}
+      {{/each}}
+      <br />
+    {{#link-to 'devices' class="pull-right"}}View all{{/link-to}}
+    <div class="clearfix"></div>
+   </div>
+ </div>
+</div>
+
+<div class="col-xs-12 col-md-6">
+  <div class="box box-success">
+    <div class="box-header">
+      <span class="box-title" style="font-size: 14px;">
+        <i class="fa fa-file-o"></i> &nbsp; Media status
+      </span>
+    </div>
+
+    <div class="box-body">
+      <p> <span class="badge bg-green">{{model.length}}</span> {{#link-to 'playlists'}}Playlists available{{/link-to}}</p>
+
+      {{#each model as |playlist|}}
+       {{#if playlist.itemsNum}}
+         <div class="btn btn-block {{if playlist.isCurrent 'bg-aqua' 'bg-green'}}" {{action set 'application.playlist.currentPlaylist' playlist.id}}>
+           <div class="col-xs-2">
+             <h1><i class="fa fa-file-{{playlist.itemTypes.content.[0]}}-o "></i></h1>
+           </div>
+           <div class="col-xs-10 text-left">
+           <strong>{{playlist.name}}</strong>
+           <div>
+             <small>{{playlist.itemsNum}} tracks</small>
+           </div>
+
+           </div>
+           <div class="clearfix"></div>
+         </div>
+         {{/if}}
+       {{/each}}
+    </div>
+  </div>
+</div>
+
+
+ </div>
 </section>

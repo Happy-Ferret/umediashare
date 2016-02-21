@@ -69,27 +69,35 @@ export default Ember.Object.extend({
    this.set('device', null);
  },
 
- load : function(url, contentType) {
+ load : function(url, contentType, cb) {
     var renderer = this.lookupRenderer();
     if (!renderer) {
       this.set('errorMessage', 'Cannot lookup renderer');
       return;
     }
 
-    this.set('isMediaLoading', true);
+    renderer.stop((err) => {
+      if (err) {
+        this.set('errorMessage', err.toString());
+      }
 
-    renderer.load(url, this.lookupOptions(url, contentType), (err) => {
-        if(err) {
-          this.set('errorMessage', err.toString());
-        }
-        this.set('isMediaLoading', false);
-    });
+      setTimeout( () => {
+        this.set('isMediaLoading', true);
+
+        renderer.load(url, this.lookupOptions(url, contentType), (err) => {
+            if(err) {
+              this.set('errorMessage', err.toString());
+            }
+            this.set('isMediaLoading', false);
+            if (cb) {
+              cb();
+            }
+        });
+      }, 500);
+    })
   },
 
   lookupRenderer : function() {
-      if (this.get('renderer')) {
-        this.get('renderer').stop();
-      }
       this.set('errorMessage', null);
       this.set('device', null);
       this.set('renderer', null);
