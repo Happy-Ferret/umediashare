@@ -12,9 +12,10 @@ Currently supported : <br />
 
 
 ## Screenshots
-[![](https://raw.githubusercontent.com/linuxenko/umediashare/media/thumbs/dashboard-thumb.png)](https://raw.githubusercontent.com/linuxenko/umediashare/media/images/dashboard.png)
-
-[![](https://raw.githubusercontent.com/linuxenko/umediashare/media/thumbs/deviceinfo-p.png)](https://raw.githubusercontent.com/linuxenko/umediashare/media/images/deviceinfo.png)   [![](https://raw.githubusercontent.com/linuxenko/umediashare/media/thumbs/devices-p.png)](https://raw.githubusercontent.com/linuxenko/umediashare/media/images/devices.png)  [![](https://raw.githubusercontent.com/linuxenko/umediashare/media/thumbs/newplaylist-p.png)](https://raw.githubusercontent.com/linuxenko/umediashare/media/images/newplaylist.png)   [![](https://raw.githubusercontent.com/linuxenko/umediashare/media/thumbs/playlistmoving-p.png)](https://raw.githubusercontent.com/linuxenko/umediashare/media/images/playlistmoving.png)  
+<a href="https://raw.githubusercontent.com/linuxenko/umediashare/media/images/dashboard.png">
+<img height=360 width=550 src="https://raw.githubusercontent.com/linuxenko/umediashare/media/thumbs/dashboard-thumb.png" align=left />
+</a>
+[![](https://raw.githubusercontent.com/linuxenko/umediashare/media/thumbs/deviceinfo-p.png)](https://raw.githubusercontent.com/linuxenko/umediashare/media/images/deviceinfo.png)   [![](https://raw.githubusercontent.com/linuxenko/umediashare/media/thumbs/devices-p.png)](https://raw.githubusercontent.com/linuxenko/umediashare/media/images/devices.png)  
 
 
 ## Installation
