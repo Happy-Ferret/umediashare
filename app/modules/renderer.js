@@ -94,7 +94,7 @@ export default Ember.Object.extend({
             }
         });
       }, 500);
-    })
+    });
   },
 
   lookupRenderer : function() {
