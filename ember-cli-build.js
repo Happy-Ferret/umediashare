@@ -40,8 +40,14 @@ module.exports = function(defaults) {
     destDir: "/fonts"
   });
 
+  var buggy = new Funnel("vendor/", {
+    srcDir: "/",
+    include: ["buggyvid.png", "buggyvid-transparent.png"],
+    destDir: "/assets"
+  });
 
-  assets = mergeTrees([faAssets, roAssets, koAssets]);
+
+  assets = mergeTrees([faAssets, roAssets, koAssets, buggy]);
 
   return app.toTree(assets);
 };

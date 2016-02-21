@@ -18,7 +18,8 @@ app.on('window-all-closed', function onWindowAllClosed() {
 app.on('ready', function onReady() {
     mainWindow = new BrowserWindow({
         width: 1000,
-        height: 600
+        height: 600,
+        icon :  __dirname + '/dist/assets/buggyvid.png'
     });
 
     delete mainWindow.module;
