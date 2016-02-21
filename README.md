@@ -18,6 +18,7 @@ Application based on [ember-cli electron](https://github.com/felixrieseberg/embe
 </a>
 [![](https://raw.githubusercontent.com/linuxenko/umediashare/media/thumbs/deviceinfo-p.png)](https://raw.githubusercontent.com/linuxenko/umediashare/media/images/deviceinfo.png)   [![](https://raw.githubusercontent.com/linuxenko/umediashare/media/thumbs/devices-p.png)](https://raw.githubusercontent.com/linuxenko/umediashare/media/images/devices.png)  
 
+[More...](https://github.com/linuxenko/umediashare/tree/media/images)
 
 ## Installation
 
