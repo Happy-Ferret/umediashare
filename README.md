@@ -10,6 +10,7 @@ Currently supported : <br />
  * LG TV <br />
  * Linux devices and desktops (gmediarenderer , opengl renderer application)
 
+Application based on [ember-cli electron](https://github.com/felixrieseberg/ember-electron)
 
 ## Screenshots
 <a href="https://raw.githubusercontent.com/linuxenko/umediashare/media/images/dashboard.png">
