@@ -36,12 +36,12 @@ $ ember electron
 
 ## Download 
 
-  You can download following binaries from [binary project builds](https://github.com/linuxenko/umediashare/tree/binary)
-  * [ums-darwin-x64.tgz](https://github.com/linuxenko/umediashare/blob/binary/ums-darwin-x64.tgz?raw=true) <br />
-  * [ums-linux-ia32.tgz](https://github.com/linuxenko/umediashare/blob/binary/ums-linux-ia32.tgz?raw=true) <br />
-  * [ums-linux-x64.tgz](https://github.com/linuxenko/umediashare/blob/binary/ums-linux-x64.tgz?raw=true) <br />
-  * [ums-win32-ia32.tgz](https://github.com/linuxenko/umediashare/blob/binary/ums-win32-ia32.tgz?raw=true) <br />
-  * [ums-win32-x64.tgz](https://github.com/linuxenko/umediashare/blob/binary/ums-win32-x64.tgz?raw=true)
+  You can download following binaries from [binary project builds v0.0.1](https://github.com/linuxenko/umediashare/releases/tag/v0.0.1)
+  * [ums-darwin-x64.tgz](https://github.com/linuxenko/umediashare/releases/download/v0.0.1/ums-darwin-x64.tgz) <br />
+  * [ums-linux-ia32.tgz](https://github.com/linuxenko/umediashare/releases/download/v0.0.1/ums-linux-ia32.tgz) <br />
+  * [ums-linux-x64.tgz](https://github.com/linuxenko/umediashare/releases/download/v0.0.1/ums-linux-x64.tgz) <br />
+  * [ums-win32-ia32.tgz](https://github.com/linuxenko/umediashare/releases/download/v0.0.1/ums-win32-ia32.tgz) <br />
+  * [ums-win32-x64.tgz](https://github.com/linuxenko/umediashare/releases/download/v0.0.1/ums-win32-x64.tgz)
 
 
 ### Technologies: <br />
