@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 import getProps from '../utils/utility-getprop';
-var MediaRendererClient = require('upnp-mediarenderer-client');
+var MediaRendererClient = require('upnp-rndr');
 var Client = require('upnp-device-client');
 
 export default DS.Model.extend({

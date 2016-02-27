@@ -79,6 +79,6 @@
   "dependencies": {
     "nodecast-js": "^1.0.3",
     "upnp-device-client": "^1.0.0",
-    "upnp-mediarenderer-client": "git+https://github.com/linuxenko/node-upnp-mediarenderer-client.git"
+    "upnp-rndr": "^1.2.2"
   }
 }
