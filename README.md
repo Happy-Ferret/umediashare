@@ -1,6 +1,6 @@
 [![](https://raw.githubusercontent.com/linuxenko/umediashare/media/contrib/umediashare.png)](https://raw.githubusercontent.com/linuxenko/umediashare/media/contrib/umediashare.png)  <br /><br />
 
-[![Join the chat at https://gitter.im/linuxenko/umediashare](https://badges.gitter.im/linuxenko/umediashare.svg)](https://gitter.im/linuxenko/umediashare?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/linuxenko/umediashare.svg?branch=master)](https://travis-ci.org/linuxenko/umediashare) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/linuxenko/umediashare/trend.png)](https://bitdeli.com/free "Bitdeli Badge")  
+[![Join the chat at https://gitter.im/linuxenko/umediashare](https://badges.gitter.im/linuxenko/umediashare.svg)](https://gitter.im/linuxenko/umediashare?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/linuxenko/umediashare.svg?branch=master)](https://travis-ci.org/linuxenko/umediashare) 
 
 ### About
 
