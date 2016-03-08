@@ -37,11 +37,6 @@ $ ember electron
 ## Download 
 
   You can download following binaries from [binary project builds v0.0.1](https://github.com/linuxenko/umediashare/releases/tag/v0.0.1)
-  * [ums-darwin-x64.tgz](https://github.com/linuxenko/umediashare/releases/download/v0.0.1/ums-darwin-x64.tgz) <br />
-  * [ums-linux-ia32.tgz](https://github.com/linuxenko/umediashare/releases/download/v0.0.1/ums-linux-ia32.tgz) <br />
-  * [ums-linux-x64.tgz](https://github.com/linuxenko/umediashare/releases/download/v0.0.1/ums-linux-x64.tgz) <br />
-  * [ums-win32-ia32.tgz](https://github.com/linuxenko/umediashare/releases/download/v0.0.1/ums-win32-ia32.tgz) <br />
-  * [ums-win32-x64.tgz](https://github.com/linuxenko/umediashare/releases/download/v0.0.1/ums-win32-x64.tgz)
 
 
 ### Technologies: <br />
@@ -53,18 +48,12 @@ $ ember electron
  
  
 ### TODO:<br />
-  * Bug fixing <br />
-  * Fixing bugs <br />
-  * ... ok ?
+  * userMedia sharing webcam <br />
+  * userMedia sharing screen <br />
  
 ## Contribution free
 
  * Code, issues, comment, questions .. 
-
-
-### Old promo
-Demo http://youtu.be/1xI6HVA9oGk<br />
-[Test project for development in team](https://github.com/linuxenko/umediashare/blob/master/PROMO.md). Development is in progress<br />
 
 
 
