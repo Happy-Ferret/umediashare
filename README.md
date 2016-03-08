@@ -51,7 +51,7 @@ $ ember electron
   * userMedia sharing webcam <br />
   * userMedia sharing screen <br />
  
-## Contribution free
+## Contribution
 
  * Code, issues, comment, questions .. 
 
