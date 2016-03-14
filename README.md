@@ -56,4 +56,9 @@ $ ember electron
  * Code, issues, comment, questions .. 
 
 
+## License
+
+GPLv3
+
+Copyright (c) 2016 Svetlana Linuxenko
 
